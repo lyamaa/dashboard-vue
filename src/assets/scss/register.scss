@@ -1,17 +1,13 @@
-:root {
-    --brandColor: hsl(166, 67%, 51%);
-    --background: rgb(247, 247, 247);
-    --textDark: hsla(0, 0%, 0%, 0.66);
-    --textLight: hsla(0, 0%, 0%, 0.33);
-  }
+
   .va {
     display: flex;
     align-items: center;
   }
-  body {
-    background: var(--background);
-    height: 100vh;
-    color: var(--textDark);
+  
+  .reg {
+    
+      background-color: #282a36;
+    
   }
 
   .field:not(:last-child) {

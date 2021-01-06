@@ -3,7 +3,7 @@ html, body {
     font-size: 16px;
     line-height: 1.5;
     height: 100%;
-    background: #ECF0F3;
+    
   }
   nav.navbar {
     border-top: 4px solid #276cda;
@@ -20,6 +20,12 @@ html, body {
     width: 100%;
     height: 100%;
     margin-left: 0;
+  }
+  .menu {
+    background-color: white;
+  }
+  .col{
+    background-color: white;
   }
   .menu-label {
     color: #8F99A3;

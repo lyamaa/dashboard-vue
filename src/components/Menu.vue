@@ -1,5 +1,5 @@
 <template>
-    <div class="column is-3">
+    <div class="column col is-3">
       <aside class="menu is-hidden-mobile">
         <p class="menu-label">General</p>
         <ul class="menu-list">
