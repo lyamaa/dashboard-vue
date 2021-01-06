@@ -28,9 +28,11 @@
           <a class="button is-light">
             Log in
           </a>
+           <a class="navbar-item button" href="/profile">{{user.username}}</a>
           <a href="javascript:void(0)" @click="logout" class="button is-danger">
             Logout
           </a>
+         
         </div>
       </div>
     </div>
@@ -44,6 +46,7 @@ import axios from 'axios'
 import { useRouter } from 'vue-router'
 export default {
     name: "Navbar",
+     props: ['user'],
     setup(){
         const router = useRouter()
         const logout = async() => {
