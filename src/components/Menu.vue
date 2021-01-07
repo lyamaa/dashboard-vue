@@ -5,7 +5,7 @@
         <ul class="menu-list">
           <li><router-link to="/dashboard" active-class="active" >Dashboard</router-link></li>
           <li><router-link to="/users" active-class="active">Users</router-link></li>
-          <li><a>Other</a></li>
+          <li><router-link to="/roles" active-class="active">Roles</router-link></li>
         </ul>
         
       </aside>

@@ -20,48 +20,50 @@
         </div>
       </div>
       <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          
-           <router-link class="navbar-item" to="/profile"> Welocme, &nbsp; {{user.username}}</router-link>
-          <a href="javascript:void(0)" @click="logout" class="button is-danger">
-            Logout
-          </a>
-          <router-link to="/register" class="button is-primary">
-            <strong>Sign up</strong>
-          </router-link>
-          <router-link to='/login' class="button is-light">
-            Log in
-          </router-link>
-         
+        <div class="navbar-item">
+          <div class="buttons">
+            <router-link class="navbar-item" to="/profile">
+              Welocme, &nbsp; {{ user.username }}</router-link
+            >
+            <a
+              href="javascript:void(0)"
+              @click="logout"
+              class="button is-danger"
+            >
+              Logout
+            </a>
+            <router-link to="/register" class="button is-primary">
+              <strong>Sign up</strong>
+            </router-link>
+            <router-link to="/login" class="button is-light">
+              Log in
+            </router-link>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </nav>
   <!-- END NAV -->
 </template>
 
 <script>
-import axios from 'axios'
-import { useRouter } from 'vue-router'
+import axios from "axios";
+import { useRouter } from "vue-router";
 export default {
-    name: "Navbar",
-     props: ['user'],
-    setup(){
-        const router = useRouter()
-        const logout = async() => {
-            await axios.post('logout', {
+  name: "Navbar",
+  props: ["user"],
+  setup() {
+    const router = useRouter();
+    const logout = async () => {
+      await axios.post("logout", {});
 
-            })
+      router.push("/login");
+    };
 
-            router.push('/login')
-        }
-
-        return {
-            logout,
-        }
-    }
-}
+    return {
+      logout,
+    };
+  },
+};
 </script>
 

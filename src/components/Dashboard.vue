@@ -1,16 +1,7 @@
 <template>
   <div class="column is-9">
     <nav class="breadcrumb" aria-label="breadcrumbs"></nav>
-    <section class="hero is-info welcome is-small">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">
-            Hello, <strong></strong>
-          </h1>
-          <h2 class="subtitle">Welcome to dashboard!</h2>
-        </div>
-      </div>
-    </section>
+      <Section  />
     <section class="info-tiles">
       <div class="tile is-ancestor has-text-centered">
         <div class="tile is-parent">
@@ -487,9 +478,16 @@
 </template>
 
 <script>
+
+import Section from "./Section"
 export default {
   name: "Dashboard",
-  props: ["user"],
+  components: {
+    Section,
+  },
+  
+  
+
 }
 </script>
 
