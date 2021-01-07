@@ -1,6 +1,7 @@
 import {Role} from '@/classes/role'
+import {Entity} from '@/interfaces/entity'
 
-export class User {
+export class User implements Entity {
     id: number;
     username: string;
     email: string;

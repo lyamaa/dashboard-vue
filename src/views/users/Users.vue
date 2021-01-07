@@ -62,6 +62,7 @@
 </template>
 <script lang="ts">
 import { ref, onMounted } from "vue";
+import {Entity} from "../../interfaces/entity"
 import axios from "axios";
 
 export default {
@@ -95,7 +96,7 @@ export default {
        if(confirm('Are you sure to delete.!!')){
          const res = await axios.delete(`user/${id}`)
 
-         users.value =users.value.filter((u: {id:number})=> u.id !== id)
+         users.value =users.value.filter((e: Entity)=> e.id !== id)
        }
      }
 
