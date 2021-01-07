@@ -93,7 +93,7 @@ export default {
 
      const del = async (id: number) => {
        if(confirm('Are you sure to delete.!!')){
-         const res = await axios.delete(`users/${id}`)
+         const res = await axios.delete(`user/${id}`)
 
          users.value =users.value.filter((u: {id:number})=> u.id !== id)
        }
