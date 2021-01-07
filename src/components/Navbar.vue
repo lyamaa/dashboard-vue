@@ -22,16 +22,17 @@
       <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
-          </a>
-           <a class="navbar-item button" href="/profile">{{user.username}}</a>
+          
+           <router-link class="navbar-item" to="/profile"> Welocme, &nbsp; {{user.username}}</router-link>
           <a href="javascript:void(0)" @click="logout" class="button is-danger">
             Logout
           </a>
+          <router-link to="/register" class="button is-primary">
+            <strong>Sign up</strong>
+          </router-link>
+          <router-link to='/login' class="button is-light">
+            Log in
+          </router-link>
          
         </div>
       </div>

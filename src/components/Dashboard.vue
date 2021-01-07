@@ -5,7 +5,7 @@
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
-            Hello, <strong>{{ user.username }}</strong>
+            Hello, <strong></strong>
           </h1>
           <h2 class="subtitle">Welcome to dashboard!</h2>
         </div>
@@ -394,7 +394,7 @@
         </div>
       </div>
       <!-- here -->
-      <div class="column is-6 dash">
+      <div class="column is-6">
         <!-- here -->
         <div class="card events-card">
           <header class="card-header">
@@ -486,12 +486,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
+<script>
+export default {
   name: "Dashboard",
   props: ["user"],
-});
+}
 </script>
 

@@ -3,11 +3,15 @@
       <aside class="menu is-hidden-mobile">
         <p class="menu-label">General</p>
         <ul class="menu-list">
-          <li><a class="is-active">Dashboard</a></li>
-          <li><a>Customers</a></li>
+          <li><router-link to="/dashboard" active-class="active" >Dashboard</router-link></li>
+          <li><router-link to="/users" active-class="active">Users</router-link></li>
           <li><a>Other</a></li>
         </ul>
         
       </aside>
     </div>
 </template>
+
+<style src="../_main.scss" lang="scss">
+
+</style>
