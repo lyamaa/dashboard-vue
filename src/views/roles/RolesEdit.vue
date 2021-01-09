@@ -1,5 +1,5 @@
 <template>
-  <form class="box" @submit.prevent="submit">
+    <form class="box" @submit.prevent="submit">
     <div class="field">
       <label class="label">Name</label>
       <div class="control">
@@ -7,7 +7,7 @@
           class="input is-medium"
           name="name"
           type="text"
-          placeholder="Username"
+         
           required
           v-model="name"
         />
@@ -25,6 +25,7 @@
           <input
             type="checkbox"
             :value="permission.id"
+            :checked="checked(permission.id)"
             @change="select(permission.id, $event.target.checked)"
           />
           &nbsp;<strong>{{ permission.name }}</strong>
@@ -38,20 +39,32 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref } from "vue";
-import axios from "axios";
-import router from "@/router";
+import axios from 'axios';
+
+import { onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { Role } from '@/classes/role';
+
 export default {
-  name: "RolesCreate",
-  setup() {
+    name: "RolesEdit",
+
+    setup() {
     const name = ref("");
     const permissions = ref([]);
     const selected = ref([] as number[]);
+    const router = useRouter()
+    const {params} = useRoute( )
 
     onMounted(async () => {
       const res = await axios.get("permissions");
 
       permissions.value = res.data.data;
+
+      const roleCall = await axios.get(`roles/${params.id}`)
+      const role: Role = roleCall.data.data
+      name.value = role.name
+
+      selected.value = role.permissions.map(p => p.id)
     });
 
     const select = (id: number, checked: boolean) => {
@@ -65,7 +78,7 @@ export default {
     };
 
     const submit = async () => {
-      await axios.post("roles", {
+      await axios.put(`roles/${params.id}`, {
         name: name.value,
         permissions: selected.value,
       });
@@ -73,13 +86,18 @@ export default {
       await router.push("/roles");
     };
 
+    const checked =  (id: number) => selected.value.some(s => s === id)
+    
+        
+
     return {
       name,
       permissions,
       select,
       selected,
       submit,
+      checked,
     };
   },
-};
+}
 </script>

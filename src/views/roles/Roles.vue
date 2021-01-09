@@ -3,7 +3,7 @@
       <div class="column is-12">
         <div class="card events-card">
           <div class="buttons" style="">
-            <router-link to="/user/create" class="button is-primary mt-2" style="margin-left: 1rem">New Role</router-link>
+            <router-link to="/roles/create" class="button is-info mt-2" style="margin-left: 1rem">New Role</router-link>
             
           </div>
           <header class="card-header">

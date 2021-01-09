@@ -8,6 +8,9 @@ import UserCreate from "@/views/users/UserCreate.vue"
 import UserEdit from "@/views/users/UserEdit.vue"
 import Home from "@/views/Layout/Home.vue"
 import Dashboard from "@/components/Dashboard.vue"
+import RolesCreate from "@/views/roles/RolesCreate.vue"
+import RolesEdit from "@/views/roles/RolesEdit.vue"
+
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,7 +23,9 @@ const routes: Array<RouteRecordRaw> = [
       {path: '/users', component: Users},
       {path: '/roles', component: Roles},
       {path: '/user/create', component: UserCreate},
-      {path: '/users/:id/edit', component: UserEdit}
+      {path: '/users/:id/edit', component: UserEdit},
+      {path: '/roles/create', component: RolesCreate},
+      {path: '/roles/:id/edit', component: RolesEdit},
     ]
   },
   {
