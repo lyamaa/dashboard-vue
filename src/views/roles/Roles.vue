@@ -56,20 +56,7 @@
               </table>
             </div>
           </div>
-          <footer class="card-footer" style="margin-top: 4rem">
-            <nav class="pagination" role="navigation" aria-label="pagination">
-              <a
-                href="javascript:void(0)"
-                class="pagination-previous"
-                @click="prev"
-                >Previous</a
-              >
-              <a href="javascript:void(0)" class="pagination-next" @click="next"
-                >Next page</a
-              >
-              <ul class="pagination-list"></ul>
-            </nav>
-          </footer>
+          
         </div>
       </div>
     </div>
@@ -78,8 +65,10 @@
 import axios from "axios"
 import { onMounted, ref } from 'vue'
 import { Entity } from '../../interfaces/entity';
+
     export default {
         name: "Roles",
+    
         setup(){
             const roles = ref([]);
 

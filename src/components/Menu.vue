@@ -6,6 +6,7 @@
           <li><router-link to="/dashboard" active-class="active" >Dashboard</router-link></li>
           <li><router-link to="/users" active-class="active">Users</router-link></li>
           <li><router-link to="/roles" active-class="active">Roles</router-link></li>
+          <li><router-link to="/products" active-class="active">Products</router-link></li>
         </ul>
         
       </aside>

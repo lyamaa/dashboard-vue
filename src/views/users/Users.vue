@@ -62,20 +62,7 @@
               </table>
             </div>
           </div>
-          <footer class="card-footer" style="margin-top: 4rem">
-            <nav class="pagination" role="navigation" aria-label="pagination">
-              <a
-                href="javascript:void(0)"
-                class="pagination-previous"
-                @click="prev"
-                >Previous</a
-              >
-              <a href="javascript:void(0)" class="pagination-next" @click="next"
-                >Next page</a
-              >
-              <ul class="pagination-list"></ul>
-            </nav>
-          </footer>
+           <Pagination :last-page="lastPage" @page-changed="load($event)"/>
         </div>
       </div>
     </div>
@@ -84,32 +71,24 @@
 import { ref, onMounted } from "vue";
 import { Entity } from "../../interfaces/entity";
 import axios from "axios";
+import Pagination from '@/components/Pagination.vue';
 
 export default {
   name: "Users",
+  components: { Pagination },
   setup() {
     const users = ref([]);
-    const page = ref(1);
-    const last = ref(0);
+    
+    const lastPage = ref(0)
 
-    const load = async () => {
-      const res = await axios.get(`users?page=${page.value}`);
+    const load = async (page = 1) => {
+      const res = await axios.get(`users?page=${page}`);
 
       users.value = res.data.data;
-      last.value = res.data.meta.last_page;
+      lastPage.value = res.data.meta.last_page;
     };
 
-    const next = async () => {
-      if (page.value === last.value) return;
-      page.value++;
-      await load();
-    };
-
-    const prev = async () => {
-      if (page.value === 1) return;
-      page.value--;
-      await load();
-    };
+    
     onMounted(load);
 
     const del = async (id: number) => {
@@ -124,8 +103,8 @@ export default {
 
     return {
       users,
-      next,
-      prev,
+      load,
+      lastPage,
       del,
     };
   },
