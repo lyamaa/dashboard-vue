@@ -1,5 +1,5 @@
 <template>
-  <form class="box">
+  <form class="box" @submit.prevent="submit">
     <div class="field">
       <label class="label">Title</label>
       <div class="control">
@@ -30,16 +30,21 @@
         <label class="label mt-5">Image</label>
         <div class="file is-right is-warning is-medium mt-5">
           <label class="file-label">
-            <input class="file-input" type="file" name="resume" />
+            <input
+             
+              type="file"
+                hidden
+                @change="change($event.target.files)"
+            />
             <span class="file-cta">
               <span class="file-icon">
                 <i class="fas fa-upload"></i>
               </span>
-              <span class="file-label"> Right file… </span>
+              <span class="file-label"> Upload </span>
             </span>
-            <span class="file-name">
-              Screen Shot 2017-07-29 at 15.54.25.png
-            </span>
+            
+                <input disabled class="file-name mt-0" type="text" name="image" v-model="image"/>
+            
           </label>
         </div>
       </div>
@@ -52,9 +57,63 @@
           name="price"
           type="number"
           required
-          v-model="description"
+          v-model="price"
         />
       </div>
     </div>
+    <button
+      type="submit"
+      class="button is-block is-primary is-fullwidth is-medium"
+    >
+      Submit
+    </button>
   </form>
 </template>
+
+<script lang="ts">
+import axios from "axios";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+export default {
+  setup() {
+    const title = ref("");
+    const description = ref("");
+    const image = ref("");
+    const price = ref(0);
+    const router = useRouter();
+
+    const submit = async () => {
+      await axios.post("products", {
+        title: title.value,
+        description: description.value,
+        image: image.value,
+        price: price.value,
+      });
+
+      await router.push("/products");
+    };
+
+    const change = async (files: File | any) => {
+        const file = files.item(0)
+
+        const data = new FormData;
+        data.append('image', file)
+
+        const res = await axios.post('upload', data)
+
+        image.value = res.data.url
+
+        console.log(res)
+    }
+
+    return {
+      title,
+      description,
+      image,
+      price,
+      submit,
+      change,
+    };
+  },
+};
+</script>
