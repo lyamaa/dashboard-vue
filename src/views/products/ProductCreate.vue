@@ -30,25 +30,27 @@
         <label class="label mt-5">Image</label>
         <div class="file is-right is-warning is-medium mt-5">
           <label class="file-label">
-            <input
-             
-              type="file"
-                hidden
-                @change="change($event.target.files)"
-            />
+            <!-- Inupt -->
+            <Upload @file-upload="image= $event" />
             <span class="file-cta">
               <span class="file-icon">
                 <i class="fas fa-upload"></i>
               </span>
               <span class="file-label"> Upload </span>
             </span>
-            
-                <input disabled class="file-name mt-0" type="text" name="image" v-model="image"/>
-            
+
+            <input
+              disabled
+              class="file-name mt-0"
+              type="text"
+              name="image"
+              v-model="image"
+            />
           </label>
         </div>
       </div>
     </div>
+    
     <div class="field">
       <label class="label">Price</label>
       <div class="control">
@@ -61,6 +63,7 @@
         />
       </div>
     </div>
+    
     <button
       type="submit"
       class="button is-block is-primary is-fullwidth is-medium"
@@ -74,7 +77,10 @@
 import axios from "axios";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import Upload from "@/components/Upload.vue";
 export default {
+  name: "ProductCreate",
+  components: {Upload},
   setup() {
     const title = ref("");
     const description = ref("");
@@ -93,26 +99,12 @@ export default {
       await router.push("/products");
     };
 
-    const change = async (files: File | any) => {
-        const file = files.item(0)
-
-        const data = new FormData;
-        data.append('image', file)
-
-        const res = await axios.post('upload', data)
-
-        image.value = res.data.url
-
-        console.log(res)
-    }
-
     return {
       title,
       description,
       image,
       price,
       submit,
-      change,
     };
   },
 };
