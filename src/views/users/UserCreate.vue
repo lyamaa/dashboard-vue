@@ -1,7 +1,7 @@
 <template>
-  <form class="box" @submit.prevent="submit" >
+  <form class="box" @submit.prevent="submit">
     <div class="field">
-          <label class="label">Username</label>
+      <label class="label">Username</label>
       <div class="control">
         <input
           class="input is-medium"
@@ -15,7 +15,7 @@
     </div>
 
     <div class="field">
-          <label class="label">Email</label>
+      <label class="label">Email</label>
       <div class="control">
         <input
           class="input is-medium"
@@ -27,14 +27,16 @@
         />
       </div>
     </div>
-    
+
     <div class="field">
       <label class="label">Role</label>
       <div class="control">
         <div class="select">
           <select name="role" v-model="role_id">
             <option value="0">Select Roles</option>
-            <option v-for="role in roles" :key="role.id" :value="role.id">{{role.name}}</option>
+            <option v-for="role in roles" :key="role.id" :value="role.id">
+              {{ role.name }}
+            </option>
           </select>
         </div>
       </div>
@@ -50,43 +52,42 @@
 
 
 <script lang="ts">
-import { onMounted, ref } from 'vue';
-import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { onMounted, ref } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
 export default {
   name: "UserCreate",
 
-  setup(){
-      const username = ref('')
-      const email = ref('')
-      const role_id = ref(0)
-      const roles = ref([])
-      const router = useRouter()
+  setup() {
+    const username = ref("");
+    const email = ref("");
+    const role_id = ref(0);
+    const roles = ref([]);
+    const router = useRouter();
 
-      onMounted(async () => {
-          const res = await axios.get('roles')
+    onMounted(async () => {
+      const res = await axios.get("roles");
 
-          roles.value = res.data.data
-      })
+      roles.value = res.data.data;
+    });
 
-      const submit = async () => {
-          await axios.post('users', {
-              username: username.value,
-              email: email.value,
-              role_id: role_id.value
+    const submit = async () => {
+      await axios.post("users", {
+        username: username.value,
+        email: email.value,
+        role_id: role_id.value,
+      });
 
-          })
+      await router.push("/users");
+    };
 
-          await router.push('/users')
-      }
-
-      return {
-          username,
-          email,
-          role_id,
-          roles,
-          submit
-      }
-  }
+    return {
+      username,
+      email,
+      role_id,
+      roles,
+      submit,
+    };
+  },
 };
 </script>
