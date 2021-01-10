@@ -4,7 +4,7 @@
       <div class="column is-12">
         <div class="card events-card">
           <div class="buttons" style="">
-            <router-link to="/" class="button is-primary mt-2" style="margin-left: 1rem">Export CSV</router-link>
+            <a  class="button is-primary mt-2" style="margin-left: 1rem" @click="exportCSV">Export CSV</a>
             
           </div>
           <header class="card-header">
@@ -49,8 +49,6 @@
                         class="button is-small is-primary"
                         >View</router-link
                       >
-                     
-                      
                     </td>
                   </tr>
                 </tbody>
@@ -84,10 +82,23 @@ import axios from 'axios';
 
             onMounted(load)
 
+            const exportCSV = async () => {
+              const res = await axios.get('export', {responseType: 'blob'});
+              const blob = new Blob([res.data], {type: 'text/csv'})
+              const download = window.URL.createObjectURL(res.data)
+              const link = document.createElement('a')
+              link.href = download
+              link.download = 'orders.csv'
+              link.click()
+
+              console.log(res)
+            }
+
             return {
                 orders,
                 lastPage,
-                load
+                load,
+                exportCSV
             }
         }
 
