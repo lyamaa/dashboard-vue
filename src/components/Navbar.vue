@@ -23,21 +23,27 @@
         <div class="navbar-item">
           <div class="buttons">
             <router-link class="navbar-item" to="/profile">
-              Welocme, &nbsp; {{ user.username }}</router-link
+              Welocme, &nbsp;{{user.username}}
+             </router-link
             >
+            <div v-if="user">
             <a
               href="javascript:void(0)"
               @click="logout"
               class="button is-danger"
+
             >
               Logout
             </a>
+            </div>
+            <div v-else>
             <router-link to="/register" class="button is-primary">
               <strong>Sign up</strong>
             </router-link>
             <router-link to="/login" class="button is-light">
               Log in
             </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -46,14 +52,21 @@
   <!-- END NAV -->
 </template>
 
-<script>
+<script lang="ts">
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { useStore } from 'vuex';
+import { computed } from 'vue';
+
 export default {
   name: "Navbar",
-  props: ["user"],
+ 
   setup() {
     const router = useRouter();
+    const store = useStore()
+
+    const user = computed(() => store.state.User.user )
+
     const logout = async () => {
       await axios.post("logout", {});
 
@@ -61,7 +74,9 @@ export default {
     };
 
     return {
-      logout,
+      user,
+      logout
+      
     };
   },
 };

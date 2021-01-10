@@ -88,9 +88,10 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import axios from "axios";
 import { User } from "@/classes/user";
+import { useStore } from 'vuex';
 export default {
   name: "Profile",
   setup() {
@@ -98,20 +99,30 @@ export default {
     const email = ref("");
     const password = ref("");
     const password_confirm = ref("");
+    const store = useStore()
 
     onMounted(async () => {
-      const res = await axios.get("user");
+        const user = computed(() => store.state.User.user)
+     
 
-      const user: User = res.data.data;
-      username.value = user.username; 
-      email.value = user.email;
+      
+      username.value = user.value.username; 
+      email.value = user.value.email;
     });
 
     const submitProfile = async() => {
-        await axios.put('user/info', {
+        const res = await axios.put('user/info', {
             username: username.value,
             email: email.value
         })
+        const  u : User = res.data.data
+        await store.dispatch('User/setUser', new User(
+          u.id,
+          u.username,
+          u.email,
+          u.role,
+          u.permissions
+        ))
     }
 
     const submitPassword = async () => {

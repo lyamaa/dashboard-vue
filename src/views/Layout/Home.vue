@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Navbar :user="user" />
+    <Navbar />
     <div class="container">
       <div class="columns">
         <Menu />
-       
-        <router-view />
+
+        <router-view v-if="user" />
       </div>
     </div>
   </div>
@@ -20,6 +20,8 @@ import Dashboard from "../../components/Dashboard.vue";
 
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+import { User } from "@/classes/user";
 
 export default defineComponent({
   name: "Layout",
@@ -29,26 +31,33 @@ export default defineComponent({
     Dashboard,
   },
   setup() {
-    const router = useRouter()
-    const user = ref('')
+    const router = useRouter();
+    const user = ref(null);
+    const store = useStore();
     onMounted(async () => {
       try {
         const res = await axios.get("user");
-
-        user.value = res.data.data
+        const u : User = res.data.data
+        store.dispatch("User/setUser", new User(
+          u.id,
+          u.username,
+          u.email,
+          u.role,
+          u.permissions
+        ));
+        user.value = res.data.data;
         console.log(res);
       } catch (err) {
-        await router.push('/login')
+        await router.push("/login");
       }
     });
 
     return {
-      user
-    }
+      user,
+    };
   },
 });
 </script>
 
 <style src="../../_main.scss" lang="scss">
-
 </style>

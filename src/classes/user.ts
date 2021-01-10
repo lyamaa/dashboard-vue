@@ -17,4 +17,6 @@ export class User implements Entity {
         this.permissions = permissions
 
     }
+
+    
 }
