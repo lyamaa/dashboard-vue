@@ -8,7 +8,7 @@
             
           </div>
           <header class="card-header">
-            <p class="card-header-title">Events</p>
+            <p class="card-header-title">Users</p>
             <a href="#" class="card-header-icon" aria-label="more options">
               <span class="icon">
                 <i class="fa fa-angle-down" aria-hidden="true"></i>
