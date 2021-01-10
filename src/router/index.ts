@@ -15,6 +15,7 @@ import ProductCreate from "@/views/products/ProductCreate.vue"
 import ProductEdit from "@/views/products/ProductEdit.vue"
 import Orders from "@/views/orders/Orders.vue"
 import OrderItem from "@/views/orders/OrderItems.vue"
+import Profile from "@/views/profile/Profile.vue"
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -36,6 +37,7 @@ const routes: Array<RouteRecordRaw> = [
       {path: '/product/:id/edit', component: ProductEdit},
       {path: '/orders', component: Orders},
       {path: '/orders/:id', component: OrderItem},
+      {path: '/profile', component: Profile},
     ]
   },
   {
