@@ -10,7 +10,7 @@ import axios from "axios";
 export default {
   name: "Upload",
   emits: ["file-upload"],
-  setup(_, context ) {
+  setup(_ : any, context: any ) {
     const upload = async (files: FileList | null) => {
        if (files == null) return;
 
