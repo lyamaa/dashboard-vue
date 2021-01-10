@@ -7,6 +7,7 @@
           <li><router-link to="/users" active-class="active">Users</router-link></li>
           <li><router-link to="/roles" active-class="active">Roles</router-link></li>
           <li><router-link to="/products" active-class="active">Products</router-link></li>
+           <li><router-link to="/orders" active-class="active">Orders</router-link></li>
         </ul>
         
       </aside>
