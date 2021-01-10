@@ -51,7 +51,7 @@
                   <td>{{ product.price }}</td>
 
                   <td>
-                    <router-link to="`/products/${product.id}/edit`" class="button is-small is-primary"
+                    <router-link :to="`/product/${product.id}/edit`" class="button is-small is-primary"
                       >Edit</router-link
                     >
                     &nbsp;
