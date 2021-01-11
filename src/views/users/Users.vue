@@ -3,8 +3,8 @@
     <div class="columns dash">
       <div class="column is-12">
         <div class="card events-card">
-          <div class="buttons" style="">
-            <router-link to="/user/create" class="button is-primary mt-2" style="margin-left: 1rem">Create User</router-link>
+          <div class="buttons" v-if="authUser.canEdit('users')">
+            <router-link to="/user/create" class="button is-primary mt-2" style="margin-left: 1rem" >Create User</router-link>
             
           </div>
           <header class="card-header">
@@ -44,7 +44,8 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.role.name }}</td>
                     <td>
-                      <router-link
+                     <div v-if="authUser.canEdit('users')">
+                        <router-link
                         :to="`/users/${user.id}/edit`"
                         class="button is-small is-primary"
                         >Edit</router-link
@@ -56,6 +57,7 @@
                         @click="del(user.id)"
                         >Delete</a
                       >
+                     </div>
                     </td>
                   </tr>
                 </tbody>
@@ -68,18 +70,21 @@
     </div>
 </template>
 <script lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { Entity } from "../../interfaces/entity";
 import axios from "axios";
-import Pagination from '@/components/Pagination.vue';
+import Pagination from '../../components/Pagination.vue';
+import { useStore } from 'vuex';
 
 export default {
   name: "Users",
   components: { Pagination },
   setup() {
     const users = ref([]);
-    
     const lastPage = ref(0)
+    const store = useStore()
+
+    const authUser = computed(() => store.state.User.user)
 
     const load = async (page = 1) => {
       const res = await axios.get(`users?page=${page}`);
@@ -103,6 +108,7 @@ export default {
 
     return {
       users,
+      authUser,
       load,
       lastPage,
       del,

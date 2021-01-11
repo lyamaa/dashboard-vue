@@ -3,7 +3,7 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          Hello, Mr. <strong><router-link to="/profile">{{ user.username }}</router-link></strong>
+          Hello, Mr/Mrs. <strong><router-link to="/profile">{{ user.username }}</router-link></strong>
         </h1>
         <h2 class="subtitle">Welcome to dashboard!</h2>
       </div>

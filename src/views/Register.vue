@@ -5,18 +5,19 @@
         <div class="columns">
           <div class="column left">
             <h1 class="title is-1">DJ DASH</h1>
-            <h2 class="subtitle colored is-4">Lorem ipsum dolor sit amet.</h2>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
-              ex deleniti aliquam tempora libero excepturi vero soluta odio
-              optio sed.
-            </p>
+            <h2 class="subtitle colored is-2">नम्स्ते दाजु</h2>
+            
+             <figure class="image is-128X128 mt-5">
+              <img :src="mySvg" />
+            </figure>
+            
           </div>
           <div class="column right has-text-centered">
             <h1 class="title is-4">Sign up today</h1>
             <p class="description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              Welcome to our site....
             </p>
+            
             <form @submit.prevent="submit">
               <div class="field">
                 <div class="control">
@@ -67,7 +68,9 @@
                 Submit
               </button>
               <br />
-              <small><em>Lorem ipsum dolor sit amet consectetur.</em></small>
+               <p class="subtitle">Have an account? <router-link to="/login">Sign In</router-link> &nbsp;·&nbsp;</p>
+               <small> <p v-if="error" class="help is-danger box">{{error}}</p></small>
+            
             </form>
           </div>
         </div>
@@ -125,6 +128,7 @@ export default defineComponent({
     const password = ref("");
     const password_confirm = ref("");
     const router = useRouter();
+    const error = ref(null)
 
     const submit = async () => {
       const res = await axios.post("register", {
@@ -132,11 +136,17 @@ export default defineComponent({
         email: email.value,
         password: password.value,
         password_confirm: password_confirm.value,
-      });
-
+      }).then(async () => {
+         await router.push("/login");
+      })
+      .catch(err => {
+          console.log(err)
+          error.value = err.response.data.detail
+          error.value = err.response.data.username
+        })
       console.log(res);
 
-      await router.push("/login");
+     
     };
 
     return {
@@ -145,6 +155,8 @@ export default defineComponent({
       password,
       password_confirm,
       submit,
+      error,
+      mySvg: require('../assets/img/profile.svg'),
     };
   },
 });

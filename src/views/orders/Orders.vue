@@ -3,7 +3,7 @@
     <div class="columns dash">
       <div class="column is-12">
         <div class="card events-card">
-          <div class="buttons" style="">
+          <div class="buttons" v-if="authUser.canEdit('users')">
             <a  class="button is-primary mt-2" style="margin-left: 1rem" @click="exportCSV">Export CSV</a>
             
           </div>
@@ -62,9 +62,10 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Pagination from "../../components/Pagination.vue"
 import axios from 'axios';
+import { useStore } from 'vuex';
     export default {
         name: "Orders",
         components: {Pagination},
@@ -72,6 +73,9 @@ import axios from 'axios';
         setup() {
             const orders = ref([]);
             const lastPage= ref(0)
+             const store = useStore()
+
+             const authUser = computed(() => store.state.User.user)
 
             const load = async(page = 1) => {
                 const res = await axios.get(`orders?page=${page}`)

@@ -2,7 +2,7 @@
       <div class="columns dash">
       <div class="column is-12">
         <div class="card events-card">
-          <div class="buttons" style="">
+          <div class="buttons" v-if="authUser.canEdit('users')">
             <router-link to="/roles/create" class="button is-info mt-2" style="margin-left: 1rem">New Role</router-link>
             
           </div>
@@ -38,7 +38,8 @@
                     <td>{{role.name}}</td>
                     
                     <td>
-                      <router-link
+                      <div v-if="authUser.canEdit('users')">
+                        <router-link
                         :to="`/roles/${role.id}/edit`"
                         class="button is-small is-primary"
                         >Edit</router-link
@@ -50,6 +51,7 @@
                         @click="del(role.id)"
                         >Delete</a
                       >
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -63,14 +65,18 @@
 </template>
 <script lang="ts">
 import axios from "axios"
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { Entity } from '../../interfaces/entity';
+import { useStore } from 'vuex';
 
     export default {
         name: "Roles",
     
         setup(){
             const roles = ref([]);
+            const store = useStore()
+
+            const authUser = computed(() => store.state.User.user)
 
             onMounted(async () => {
                 const response = await axios.get('roles')
@@ -88,7 +94,8 @@ import { Entity } from '../../interfaces/entity';
 
             return{
                 roles,
-                del
+                del,
+                authUser,
             }
         }
     }

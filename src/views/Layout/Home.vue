@@ -5,7 +5,7 @@
       <div class="columns">
         <Menu />
 
-        <router-view v-if="user" />
+        <router-view  v-if="!loggedIn"/>
       </div>
     </div>
   </div>
@@ -21,10 +21,14 @@ import Dashboard from "../../components/Dashboard.vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { User } from "@/classes/user";
+import { User } from "../../classes/user";
+import {authComputed} from "../../store/helper"
 
 export default defineComponent({
   name: "Layout",
+  computed: {
+    ...authComputed
+  },
   components: {
     Navbar,
     Menu,

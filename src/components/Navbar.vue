@@ -12,11 +12,8 @@
       </div>
       <div id="navMenu" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item" href="admin.html"> Home </a>
-          <a class="navbar-item" href="admin.html"> Orders </a>
-          <a class="navbar-item" href="admin.html"> Payments </a>
-          <a class="navbar-item" href="admin.html"> Exceptions </a>
-          <a class="navbar-item" href="admin.html"> Reports </a>
+          <a class="navbar-item" href="/"> Home </a>
+         
         </div>
       </div>
       <div class="navbar-end">
@@ -26,7 +23,7 @@
               Welocme, &nbsp;{{user.username}}
              </router-link
             >
-            <div v-if="user">
+            <div v-if="!loggedIn">
             <a
               href="javascript:void(0)"
               @click="logout"
@@ -57,8 +54,12 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 import { useStore } from 'vuex';
 import { computed } from 'vue';
+import {authComputed} from "../store/helper"
 
 export default {
+   computed: {
+    ...authComputed
+  },
   name: "Navbar",
  
   setup() {

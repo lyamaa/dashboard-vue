@@ -19,7 +19,7 @@ html, body {
   .columns {
     width: 100%;
     height: 100%;
-    margin-left: 0;
+    margin-left: 0.5rem;
   }
   .menu {
     background-color: white;
@@ -55,13 +55,14 @@ html, body {
     font-weight: 400;
   }
   .info-tiles {
-    margin: 1rem 0;
+    margin: 1rem 0 0 1rem;
   }
   .info-tiles .subtitle {
     font-weight: 300;
     color: #8F99A3;
   }
   .hero.welcome.is-info {
+    margin-left: 1rem;
     background: #36D1DC;
     background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);
     background: linear-gradient(to right, #5B86E5, #36D1DC);
@@ -90,7 +91,21 @@ html, body {
  .dash{
    height: fit-content;
    margin-top: 2%;
+   margin-right: 0;
    box-shadow: 100px, 100px;
     -webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
     -moz-box-shadow: 0 0 10px rgb(0, 0, 0);
  }
+
+ .box {
+  margin-top: 5rem;
+  box-shadow: 100px, 100px;
+  -webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
+  -moz-box-shadow: 0 0 10px rgb(0, 0, 0);
+ }
+
+ .rox {
+  margin-top: 1.6rem;
+  margin-right: 5rem;
+ 
+}

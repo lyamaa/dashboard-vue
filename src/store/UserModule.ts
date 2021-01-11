@@ -1,18 +1,24 @@
-import { User } from "@/classes/user"
+import { User } from "@/classes/user";
 
-import {Commit} from 'vuex'
+import { Commit } from "vuex";
 
 export default {
-    namespaced: true,
-    state: {
-        user: new User
-      },
-      mutations: {
-        SET_USER: (state: {user: User}, user : User) => state.user = user
-      },
-      actions: {
-        setUser: ({commit}: {commit:Commit}, user: User) => {
-          commit('SET_USER', user)
-        }
-      },
-}
+  namespaced: true,
+  state: {
+    user: new User(),
+  },
+  mutations: {
+    SET_USER: (state: { user: User }, user: User) => (state.user = user),
+  },
+  actions: {
+    setUser: ({ commit }: { commit: Commit }, user: User) => {
+      commit("SET_USER", user);
+    },
+  },
+
+  getters: {
+    loggedIn(state: any) {
+      return !!state.user;
+    },
+  },
+};
