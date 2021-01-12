@@ -18,6 +18,7 @@ export default {
       data.append("image", files[0]);
 
       const res = await axios.post("upload", data);
+     
       context.emit("file-upload", res.data.url);
 
       console.log(res);

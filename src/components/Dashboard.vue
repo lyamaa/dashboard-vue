@@ -151,16 +151,14 @@ export default {
         data: {
           x: "x",
           columns: [["x"], ["Sales"]],
-          types: {
-            Sales: "pie",
-           
-          },
+          type: 'spline',
         },
         axis: {
           x: {
             type: "timeseries",
             tick: {
               format: "%Y-%m-%d",
+               fit: true
             },
           },
         },

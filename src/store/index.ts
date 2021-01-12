@@ -8,4 +8,9 @@ export default createStore({
   modules: {
     User: UserStore
   },
+  getters: {
+    loggedIn(state: any) {
+      return !!state.user;
+    },
+  },
 });

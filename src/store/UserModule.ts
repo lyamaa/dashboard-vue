@@ -16,9 +16,5 @@ export default {
     },
   },
 
-  getters: {
-    loggedIn(state: any) {
-      return !!state.user;
-    },
-  },
+  
 };

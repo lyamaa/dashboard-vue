@@ -102,7 +102,8 @@ import { useStore } from 'vuex';
                 orders,
                 lastPage,
                 load,
-                exportCSV
+                exportCSV,
+                authUser,
             }
         }
 
